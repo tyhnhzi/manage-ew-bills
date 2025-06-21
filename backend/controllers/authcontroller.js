@@ -6,8 +6,6 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
-// @desc    Đăng ký người dùng mới
-// @route   POST /api/auth/register
 exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -34,8 +32,6 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-// @desc    Đăng nhập người dùng
-// @route   POST /api/auth/login
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -57,8 +53,6 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-// @desc    Cập nhật giá điện của người dùng
-// @route   PUT /api/auth/updateprice
 exports.updateUserPrice = async (req, res) => {
     const { price } = req.body;
 
@@ -67,7 +61,7 @@ exports.updateUserPrice = async (req, res) => {
     }
 
     try {
-        const user = await User.findById(req.user._id); // Lấy user từ middleware
+        const user = await User.findById(req.user._id);
 
         if (user) {
             user.pricePerKwh = price;
