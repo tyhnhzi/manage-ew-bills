@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # Dịch vụ Backend
+  backend:
+    build: ./backend
+    container_name: backend-service
+    restart: unless-stopped
+    env_file: ./backend/.env # Nạp biến môi trường từ file .env
+    depends_on:
+      - mongo # Chỉ khởi động sau khi mongo đã sẵn sàng
+
+  # Dịch vụ Frontend + Nginx
+  frontend:
+    build: ./frontend
+    container_name: frontend-service
+    restart: unless-stopped
+    ports:
+      # Ánh xạ cổng 80 của VPS vào cổng 80 của container frontend
+      # Đây là cổng người dùng sẽ truy cập
+      - "80:80"
+    depends_on:
+      - backend # Đảm bảo backend đã chạy
+
+  # Dịch vụ Cơ sở dữ liệu MongoDB
+  mongo:
+    image: mongo:latest
+    container_name: mongo-db
+    restart: unless-stopped
+    env_file: ./backend/.env # Dùng chung biến môi trường để lấy user/pass
+    volumes:
+      # Lưu trữ dữ liệu của DB vào một volume tên là 'mongo-data'
+      # để không bị mất dữ liệu khi container khởi động lại
+      - mongo-data:/data/db
+
+volumes:
+  # Khai báo volume để Docker quản lý
+  mongo-data:

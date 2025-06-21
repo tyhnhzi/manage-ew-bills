@@ -1,0 +1,140 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.stat-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.stat-label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.add-bill-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  align-items: flex-end;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.btn-submit {
+  padding: 0.75rem 1.5rem;
+  background-color: #16a085;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  height: 48px; 
+}
+.btn-submit:hover {
+    background-color: #117a65;
+}
+.error-text {
+  color: #e74c3c;
+  width: 100%;
+  margin-top: 1rem;
+  grid-column: 1 / -1;
+}
+
+/* Table */
+.table-wrapper {
+    overflow-x: auto;
+}
+.bill-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.bill-table th, .bill-table td {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0.8rem;
+  text-align: left;
+  white-space: nowrap;
+}
+.bill-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+.bill-table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+.type-electricity {
+    font-weight: bold;
+    color: #f39c12; 
+}
+.type-water {
+    font-weight: bold;
+    color: #3498db; 
+}
+
+.btn-status {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  min-width: 120px;
+}
+.btn-status.paid {
+  background-color: #2ecc71;
+}
+.btn-status.unpaid {
+  background-color: #f1c40f;
+  color: #333;
+}
+.btn-delete {
+  padding: 5px 10px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-delete:hover {
+    background-color: #c0392b;
+}
