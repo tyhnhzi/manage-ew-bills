@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
-import Clock from './components/Clock'; // Import đồng hồ
+import Clock from './components/Clock';
 import './App.css';
 
 const Navbar = () => {
