@@ -1,9 +1,7 @@
 const Bill = require('../models/Bill');
 
-// @desc    Tạo hóa đơn mới 
-// @route   POST /api/bills
 exports.createBill = async (req, res) => {
-  // Nhận thêm billType và billDate từ request
+  
   const { billType, billDate, oldReading, newReading } = req.body;
 
   if (!billType || !billDate || oldReading === undefined || newReading === undefined) {
@@ -17,7 +15,6 @@ exports.createBill = async (req, res) => {
   const totalUsage = Number(newReading) - Number(oldReading);
   let totalAmount = 0;
 
-  // Logic tính toán dựa trên loại hóa đơn
   if (billType === 'electricity') {
     totalAmount = Math.round(totalUsage * req.user.priceElectricity);
   } else if (billType === 'water') {
@@ -34,7 +31,7 @@ exports.createBill = async (req, res) => {
     newReading,
     totalUsage: totalUsage,
     totalAmount: totalAmount,
-    isPaid: false, // Hóa đơn mới tạo mặc định là chưa thanh toán
+    isPaid: false, 
   });
 
   try {
@@ -45,11 +42,8 @@ exports.createBill = async (req, res) => {
   }
 };
 
-// @desc    Lấy tất cả hóa đơn của người dùng đã đăng nhập
-// @route   GET /api/bills
 exports.getBills = async (req, res) => {
   try {
-    // Sắp xếp theo ngày hóa đơn mới nhất
     const bills = await Bill.find({ user: req.user._id }).sort({ billDate: -1 });
     res.json(bills);
   } catch (error) {
@@ -57,8 +51,6 @@ exports.getBills = async (req, res) => {
   }
 };
 
-// @desc    Xóa một hóa đơn
-// @route   DELETE /api/bills/:id
 exports.deleteBill = async (req, res) => {
   try {
     const bill = await Bill.findById(req.params.id);
@@ -75,8 +67,6 @@ exports.deleteBill = async (req, res) => {
   }
 };
 
-// @desc    Cập nhật trạng thái thanh toán
-// @route   PUT /api/bills/:id/pay
 exports.updateBillToPaid = async (req, res) => {
   try {
     const bill = await Bill.findById(req.params.id);
